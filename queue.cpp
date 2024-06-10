@@ -13,7 +13,7 @@ T* queue_ds;
     public :
     queue(int max): q_head(-1) , q_tail(-1){
         this->max = max;
-        //queue_ds[max];
+        //queue_ds[max]; Use like this 
         queue_ds = (T*)malloc(sizeof(T) * max);
     }
 
@@ -42,7 +42,8 @@ T* queue_ds;
     T dequeue(){
        if((q_head == -1 && q_tail == -1)){
            std::cout << "Empty queue" << std::endl;
-           //return -1;
+           return T{};                                  //Default Value for tempelate
+                                                        //Cannot use static_cast as T can be a custom class
        }
        else if((q_head == q_tail) && q_head != -1 && q_tail != -1 ){
         int temp = q_head;
@@ -85,7 +86,10 @@ int main(){
 
     queue<int> q(2);
 
-    q.enqueue(22);
+    q.enqueue(11);
+    p(q.dequeue());
+    p(q.dequeue());
+    p(q.dequeue());
     p(q.dequeue());
     p("Done ");
     return 0;
