@@ -41,6 +41,18 @@ public:
         }
     }
 
+    inline int size(){
+        return top+1;
+    }
+
+    void print_stack_state(){
+
+        for(int i = 0 ; i < max ; i++){
+            std::cout << stack_ds[i] << " --->" ;
+        }
+        std::cout << std::endl;
+    }
+
 };
 
 int main(){
