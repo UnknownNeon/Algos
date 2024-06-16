@@ -1,3 +1,9 @@
+/*
+* A program to Explore the BFS path-finding algo
+* Used my previous queue to maintain the queue state
+*
+*/
+
 #include <iostream>
 #include <vector>
 
@@ -91,7 +97,7 @@ enum PATH {
 
 int main(){
 
-    // 1 is Denoting the start and 2 denotes the end ....
+    // 1 is Denoting the start and 2 denotes the end .... 
 
     const int M = 5;
     const int N = 5;
