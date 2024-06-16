@@ -81,16 +81,14 @@ T* queue_ds;
     
 };
 
-//Usage Note
-int main(){
-
-    queue<int> q(2);
-
-    q.enqueue(11);
-    p(q.dequeue());
-    p(q.dequeue());
-    p(q.dequeue());
-    p(q.dequeue());
-    p("Done ");
-    return 0;
-}
+// //Usage Note
+// int main(){
+//     queue<int> q(2);
+//     q.enqueue(11);
+//     p(q.dequeue());
+//     p(q.dequeue());
+//     p(q.dequeue());
+//     p(q.dequeue());
+//     p("Done ");
+//     return 0;
+// }
