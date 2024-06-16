@@ -79,6 +79,16 @@ T* queue_ds;
 };
 
 
+enum PATH {
+    EMPTY = -1,
+    STARTING_NODE,
+    TOP,
+    RIGHT,
+    LEFT,
+    DOWN,
+    UP
+};
+
 int main(){
 
     // 1 is Denoting the start and 2 denotes the end ....
@@ -86,8 +96,8 @@ int main(){
     const int M = 5;
     const int N = 5;
 
-    int map[M][N] = {   {1,0,0,0,0},
-                        {2,0,0,0,0},
+    int map[M][N] = {   {1,0,0,0,2},
+                        {0,0,0,0,0},
                         {0,0,0,0,0},
                         {0,0,0,0,0},
                         {0,0,0,0,0} };
@@ -100,16 +110,15 @@ int main(){
                                 {0,0,0,0,0},
                                 {0,0,0,0,0} };;
 
+    int path_tracer[M][N] = {};
+                    
+
     //Intializing our main queue for BFS
     queue<int> q_row(999);
     queue<int> q_col(999);
 
-    //Initializing an array to Store parent Nodes
-    queue<int> storage_row(999);
-    queue<int> storage_col(999);
-
     //Initializing a directional matrix
-    int dr[4] = { 0 , 1 , -1 , 0 };
+    int dr[4] = { 0 , 1 , -1 , 0 }; //  R D U L
     int dc[4] = { 1 , 0  , 0 , -1};
 
     //Starting the BFS operation to find the shortest path;
@@ -121,8 +130,8 @@ int main(){
     q_col.enqueue(sc);
     q_row.enqueue(sr);
 
-    storage_col.enqueue(sc);
-    storage_row.enqueue(sr);
+    //We also store the starting node in our path matrix
+    path_tracer[sr][sc] = PATH::STARTING_NODE;
 
     //Starting the loop of bfs 
 
@@ -152,8 +161,21 @@ int main(){
             if(tc >= N || tr >= M){ continue; }
             if(tr < 0 || tc < 0){ continue; }
             if(visited_map[tr][tc] == -1){continue;}
-            
-            std::cout << tr  << " ::::: "<< tc  << std::endl;
+
+            //The path trcer with auxilary array
+
+            if(i == 0){
+                path_tracer[tr][tc] = PATH::LEFT;
+            }
+            else if(i == 1){
+                path_tracer[tr][tc] = PATH::UP;
+            }
+            else if(i == 2){
+                path_tracer[tr][tc] = PATH::DOWN;
+            }
+            else if(i == 3){
+                path_tracer[tr][tc] = PATH::RIGHT;
+            }
 
             q_row.enqueue(tr);
             q_col.enqueue(tc);
@@ -162,5 +184,38 @@ int main(){
 
     }
 
+
+
+    //Now SR and SC are our Node positoins whoch we searched 
+    //From final node we traverse to our starting node giving us our path
+    
+    std::cout << "Running the path finding algo to trace the path from final node "<< std::endl;
+    while(true){
+        if(path_tracer[sr][sc] == PATH::STARTING_NODE){
+            std::cout << "STARTING NODE REACHED" << std::endl;
+            break;
+        }
+        if(path_tracer[sr][sc] == PATH::LEFT){
+            sr = sr ;
+            sc = sc - 1;
+            std::cout << "LEFT" << "\t";
+        }
+        if(path_tracer[sr][sc] == PATH::RIGHT){
+            sr = sr ;
+            sc = sc + 1;
+             std::cout << "RIGHT" << "\t";
+        }
+        if(path_tracer[sr][sc] == PATH::DOWN){
+            sr = sr + 1;
+            sc = sc;
+             std::cout << "DOWN" << "\t";
+        }
+        if(path_tracer[sr][sc] == PATH::UP){
+            sr = sr - 1;
+            sc = sc;
+             std::cout << "UP" << "\t";
+        }
+
+    }
     return 0;
 }
