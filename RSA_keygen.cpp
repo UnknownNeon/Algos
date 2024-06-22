@@ -59,13 +59,7 @@ int main(){
 
 
     //Encryprion 
-    const char* plain_text = "This is to be encrypted " ;
-    p("Text to be Encrypted with the RSA : ");
-    p(plain_text);
+    //The formula for encryption being : c = m^e mod n where m is the length of plain text  cannot be used 
 
-    //The formula for encryption being : c = m^e mod n where m is the length of plain text 
-
-    //TODO
-    
     return 0;   
 }
