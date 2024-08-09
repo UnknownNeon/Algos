@@ -1,5 +1,5 @@
-//Hexdump in Big Endian
-//@TODO : Small endian 
+//Hexdump in little Endian
+
 
 #include <iostream>
 #include<fstream>
@@ -12,13 +12,13 @@ int main(int argc , char* argv[] ){
         std::cerr << "Error opening file!" << std::endl;
         return 1;
     }
-    short hex;
+    unsigned short hex;
     while (file.read((char *)&hex, 2)) { 
+        hex = (hex << 8) | (hex >> 8) ;
         std::cout << std::hex << hex;
         std::cout << "\t";
       
     }
-    
     file.close();
     return 0;
 }
