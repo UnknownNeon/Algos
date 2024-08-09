@@ -15,7 +15,9 @@ int main(int argc , char* argv[] ){
     unsigned short hex;
     while (file.read((char *)&hex, 2)) { 
         hex = (hex << 8) | (hex >> 8) ;
-        std::cout << std::hex << hex;
+        std::cout << std::hex << (hex >> 8);
+        std::cout << "\t";
+        std::cout << std::hex << (hex & 0x00ff);
         std::cout << "\t";
       
     }
