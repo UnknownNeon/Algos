@@ -1,4 +1,4 @@
-//incomplete,,, need implementing padding
+//Padding not really needed ig...lol
 
 #include <iostream>
 #include <string>
@@ -10,7 +10,7 @@ const char table[] = {
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
         'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        '+', '/'
+        '/', '+'
     };
 const char* padding = "=";
 }
@@ -25,7 +25,7 @@ int counter = 0 ;
 unsigned char byte , tbyte; 
  
  
-while(counter <= text.length()){
+while(counter < text.length()){
  
 switch (inc_l)
     {
