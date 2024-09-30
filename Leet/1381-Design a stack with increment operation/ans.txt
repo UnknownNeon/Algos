@@ -1,0 +1,57 @@
+//Time Complexity: 35ms
+class CustomStack {
+public:
+    int* stack;
+    int top = -1;
+    int maxSize = 0 ;
+    CustomStack(int maxSize) {
+        stack = (int*) malloc(sizeof(int) * maxSize);
+        this->maxSize = maxSize;
+    }
+    
+    void push(int x) {
+        if(top == -1 ){
+            top = 0;
+            stack[top] = x;
+        }
+        else if((top+1) < maxSize && top != -1){
+            top++;
+            stack[top] = x;
+        }
+        else if(top == maxSize ){
+            //stack full
+        }
+    }
+    
+    int pop() {
+        if( top == -1){
+            return -1;
+        }
+        if(top == 0){
+            top = -1 ;
+            return stack[0];
+        }
+        if(top > 0 ){
+            int temp = top;
+            top--;
+            return stack[temp];
+        }
+        return 0;
+    }
+    
+    void increment(int k, int val) {
+        int size = k < maxSize ? k  : maxSize ;
+        for(int i = 0 ; i < size ; i++ ){
+            stack[i] = stack[i] + val;
+        }
+      
+    }
+};
+
+/**
+ * Your CustomStack object will be instantiated and called as such:
+ * CustomStack* obj = new CustomStack(maxSize);
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * obj->increment(k,val);
+ */
