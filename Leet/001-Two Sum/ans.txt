@@ -1,0 +1,71 @@
+// Time Complexity : 12ms , O(n)
+
+class Solution
+{
+    unsigned int Counter = 0;
+    unsigned int Counter_2 = 0;
+    vector<int> answeer;
+
+public:
+    vector<int> twoSum(vector<int> &nums, int target)
+    {
+
+        std::unordered_map<int, int> map;
+        // Initializing the map
+        for (int i = 0; i < nums.size(); i++)
+        {
+            map[nums[i]] = i;
+        }
+
+        for (int i = 0; i < nums.size(); i++)
+        {
+            int deficit = target - nums[i];
+            if (map.find(deficit) != map.end())
+            {
+                if (i == map[deficit])
+                {
+                    continue;
+                }
+                else
+                {
+                    answeer.push_back(i);
+                    answeer.push_back(map[deficit]);
+                    return answeer;
+                }
+            }
+        }
+        return answeer;
+
+        // MOST OPTIMAL BUT STACK LIMITED 0ms
+
+        // if(Counter_2 >= nums.size()){
+        //     Counter++;
+        //     Counter_2 = Counter;
+        // }
+
+        // if(Counter >= nums.size())
+        //         return answeer;
+
+        // if(nums[Counter] + nums[Counter_2] == target && (Counter != Counter_2)){
+        //     answeer.push_back(Counter);
+        //     answeer.push_back(Counter_2);
+        //     return answeer;
+        // }
+
+        // Counter_2++ ;
+        // answeer = twoSum(nums,target);
+        // return answeer;
+
+        // CORRECT ANS BUT HIGH RUNTIME 111ms
+
+        // for (int i=0 ; i < nums.size() ; i++){
+        //     for(int j=i+1  ; j < nums.size() ; j++){
+        //         if(nums[i] + nums[j] == target ){
+        //             answeer.push_back(i);
+        //             answeer.push_back(j);
+        //             return answeer;
+        //         }
+        //     }
+        // }
+    }
+};

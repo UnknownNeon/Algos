@@ -1,0 +1,127 @@
+//Time Complexity: 30ms , O(n)
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* create_next_node(ListNode* current_node) {
+        ListNode* next_node = (ListNode*)new ListNode();
+        current_node->next = next_node;
+        return next_node;
+    }
+
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        std::vector<int> number_1;
+        std::vector<int> number_2;
+
+        ListNode* li_temp = l1;
+        ListNode* li_temp_2 = l2;
+
+        while (li_temp != nullptr) {
+            number_1.push_back(li_temp->val);
+            li_temp = li_temp->next;
+        }
+
+        while (li_temp_2 != nullptr) {
+            number_2.push_back(li_temp_2->val);
+            li_temp_2 = li_temp_2->next;
+        }
+
+        reverse(number_1.begin(), number_1.end());
+        reverse(number_2.begin(), number_2.end());
+
+        int prev = 0;
+        ListNode* new_node = (ListNode*)new ListNode();
+        ListNode* save_node = new_node;
+
+        while (!number_1.empty() && !number_2.empty()) {
+
+            int temp_1 = number_1.back();
+            int temp_2 = number_2.back();
+
+            number_1.pop_back();
+            number_2.pop_back();
+
+            if (prev == 1) {
+                temp_1 += temp_2 + prev;
+                prev = 0;
+            }
+            else{
+                temp_1 += temp_2;
+            }
+
+            if (temp_1 >= 10) {
+                prev = 1;
+                temp_1 %= 10;
+            }
+
+            new_node->val = temp_1;
+
+            if(number_1.empty() && number_2.empty() && prev == 1){
+                new_node = create_next_node(new_node);
+                new_node->val = 1;
+                break;
+            }
+            if(number_1.empty() && number_2.empty() ){
+                continue;
+            }
+         
+            new_node = create_next_node(new_node);
+        }
+
+        while (!number_1.empty()) {
+            int temp_1 = number_1.back();
+            number_1.pop_back();
+            if (prev == 1) {
+                temp_1 += prev;
+                prev = 0;
+            }
+            if (temp_1 >= 10) {
+                prev = 1;
+                temp_1 %= 10;
+            }
+            new_node->val = temp_1;
+            if(!number_1.empty())
+            new_node = create_next_node(new_node);
+            if(number_1.empty() && prev == 1)
+            {
+                new_node = create_next_node(new_node);
+                new_node->val = 1;
+            }
+        }
+
+        while (!number_2.empty()) {
+
+            int temp_1 = number_2.back();
+            number_2.pop_back();
+
+            if (prev == 1) {
+                temp_1 += prev;
+                prev = 0;
+            }
+            if (temp_1 >= 10) {
+                prev = 1;
+                temp_1 %= 10;
+            }
+            new_node->val = temp_1;
+
+            if(!number_2.empty())
+            new_node = create_next_node(new_node);
+            if(number_2.empty() && prev == 1)
+            {
+                new_node = create_next_node(new_node);
+                new_node->val = 1;
+            }
+            
+        }
+        return save_node;
+    }
+};
