@@ -4,6 +4,25 @@
 // Normal Matrix Multiplication casuses a time complexity of o(n3)
 // Strassens Matrix Multiplication effeciency is O(n2.83)
 
+/*
+Definig a Small problem in Matrix multiplication Small(p):
+
+1> if the Problem is 1 x 1
+    ans : Direct Multiplication of the terms;
+2> if the Problem is 2 x 2
+    ans:
+
+    |a  b|   |e  f|     | a`  b`|
+    |    | * |    | =   |       |
+    |c  d|   |g  h|     | c`  d`|
+
+    a` = a*e + b*g;
+    b` = a*f + b*h;
+    c` = c*e + d*g;
+    d` = c*f + d*h;
+
+
+*/
 #include <iostream>
 #include <memory>
 
@@ -57,19 +76,24 @@ public:
         }
     }
     inline T **data() { return this->ptr; }
+    inline int getSize() { return this->size; }
 };
 
 int main()
 {
-    mat<int, 2> mat;
+    mat<int, 4> mat_1;
+    mat<int, 4> mat_2;
+    mat<int, 4> result;
+    algorithm(mat_1.data(), mat_2.data(), 4, result.data());
+}
 
-    mat.data()[0][0] = 1;
-    mat.data()[0][1] = 2;
-    mat.data()[1][0] = 3;
-    mat.data()[1][1] = 4;
-
-    mat.re_allocate(3);
-    mat.data()[2][0] = 5;
-
-    std::cout << mat.data()[2][0] << std::endl;
+void algorithm(int **a, int **b, int size, int **result)
+{
+    if (size <= 2)
+    {
+        result[0][0] = a[0][0] * b[0][0] + a[0][1] * b[1][0];
+        result[0][1] = a[0][0] * b[0][1] + a[0][1] * b[1][1];
+        result[1][0] = a[1][0] * b[0][0] + a[1][1] * b[1][0];
+        result[1][1] = a[1][0] * b[0][1] + a[1][1] * b[1][1];
+    }
 }
